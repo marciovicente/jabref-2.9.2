@@ -33,7 +33,7 @@ class AppearancePrefsTab extends JPanel implements PrefsTab {
     JabRefPreferences _prefs;
     private JCheckBox colorCodes, overrideFonts;//, useCustomIconTheme;
     private GridBagLayout gbl = new GridBagLayout();
-    private JButton fontButton = new JButton(Globals.lang("Set table font"));
+    private JButton fontButton = new JButton(Globals.lang("Mudar fonte da tabela"));
     private ColorSetupPanel colorPanel = new ColorSetupPanel();
     private Font font = GUIGlobals.CURRENTFONT;
     private int oldMenuFontSize;

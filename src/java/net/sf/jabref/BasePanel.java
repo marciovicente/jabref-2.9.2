@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -1491,6 +1492,31 @@ public class BasePanel extends JPanel implements ClipboardOwner, FileUpdateListe
 
                 }
               });
+              
+              
+              actions.put("markRedEntries", new AbstractWorker() {
+                private int besLength = -1;
+                public void run() {
+                	BasePanel panel = frame.basePanel();
+                    NamedCompound ce = new NamedCompound(Globals.lang("Mark red entries"));
+                    BibtexEntry[] bes = panel.getSelectedEntries();
+                    besLength = bes.length;
+
+                    for (int i=0; i<bes.length; i++) {
+                        Util.markEntry(bes[i], 4, false, ce);
+                    }
+                    ce.end();
+                    panel.undoManager.addEdit(ce);
+                }
+
+                public void update() {
+                  markBaseChanged();
+                  output(Globals.lang("Marked selected")+" "+Globals.lang(besLength>0?"entry":"entries"));
+
+                }
+              });
+              
+              
 
               actions.put("unmarkEntries", new BaseAction() {
                 public void action() {

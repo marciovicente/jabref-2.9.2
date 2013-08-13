@@ -212,6 +212,10 @@ public class JabRefFrame extends JFrame implements OutputPrinter {
       mark = new GeneralAction("markEntries", "Mark entries",
                                Globals.lang("Mark entries"),
                                prefs.getKey("Mark entries")),
+                               
+	   markRed = new GeneralAction("markRedEntries", "Mark with red",
+	           Globals.lang("Mark with red"),
+	           prefs.getKey("Mark with red")),
        unmark = new GeneralAction("unmarkEntries", "Unmark entries",
                                   Globals.lang("Unmark entries"),
                                   prefs.getKey("Unmark entries")),
@@ -1283,6 +1287,7 @@ public JabRefPreferences prefs() {
       //edit.add(exportToClipboard);
       edit.addSeparator();
       edit.add(mark);
+      edit.add(markRed);
       JMenu markSpecific = subMenu("Mark specific color");
       for (int i=0; i<Util.MAX_MARKING_LEVEL; i++)
           markSpecific.add(new MarkEntriesAction(this, i).getMenuItem());
@@ -1515,6 +1520,7 @@ public JabRefPreferences prefs() {
 
     tlb.addSeparator();
     tlb.addAction(mark);
+    tlb.addAction(markRed);
     tlb.addAction(unmark);
     tlb.addSeparator();
     if (Globals.prefs.getBoolean(SpecialFieldsUtils.PREF_SPECIALFIELDSENABLED)) {
@@ -1613,7 +1619,7 @@ public JabRefPreferences prefs() {
         openDatabaseOnlyActions = new LinkedList<Object>();
         openDatabaseOnlyActions.addAll(Arrays.asList(new Object[] { manageSelectors,
             mergeDatabaseAction, newSubDatabaseAction, close, save, saveAs, saveSelectedAs, undo,
-            redo, cut, delete, copy, paste, mark, unmark, unmarkAll, editEntry,
+            redo, cut, delete, copy, paste, mark, markRed, unmark, unmarkAll, editEntry,
             selectAll, copyKey, copyCiteKey, copyKeyAndTitle, editPreamble, editStrings, toggleGroups, toggleSearch,
             makeKeyAction, normalSearch,
             incrementalSearch, replaceAll, importMenu, exportMenu,
