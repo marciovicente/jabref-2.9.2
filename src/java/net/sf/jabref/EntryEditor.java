@@ -1386,6 +1386,7 @@ public class EntryEditor extends JPanel implements VetoableChangeListener, Entry
         }
 
         public void actionPerformed(ActionEvent e) {
+        	
             // 1. get Bitexentry for selected index (already have)
             // 2. run the LabelMaker by it
             try {
@@ -1396,6 +1397,7 @@ public class EntryEditor extends JPanel implements VetoableChangeListener, Entry
                 // this updates the table automatically, on close, but not
                 // within the tab
                 Object oldValue = entry.getField(BibtexFields.KEY_FIELD);
+                
 
                 if (oldValue != null) {
                    if (Globals.prefs.getBoolean("avoidOverwritingKey")) {
@@ -1419,12 +1421,16 @@ public class EntryEditor extends JPanel implements VetoableChangeListener, Entry
                 // entry = frame.labelMaker.applyRule(entry, panel.database) ;
                 LabelPatternUtil.makeLabel(panel.metaData, panel.database, entry);
 
+              //  JOptionPane.showMessageDialog(frame,entry.getId());
+                
                 // Store undo information:
                 panel.undoManager.addEdit(new UndoableKeyChange(panel.database, entry.getId(),
                     (String) oldValue, entry.getField(BibtexFields.KEY_FIELD)));
 
                 // here we update the field
                 String bibtexKeyData = entry.getField(BibtexFields.KEY_FIELD);
+                
+             
 
                 // set the field named for "bibtexkey"
                 setField(BibtexFields.KEY_FIELD, bibtexKeyData);

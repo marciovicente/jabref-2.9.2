@@ -225,5 +225,15 @@ public class LabelPatternUtilTest extends TestCase {
 
         }
     }
+    
+    //teste implementado pela equipe 
+    public void testSpliceWord(){
+    	BibtexEntry entry0 = BibtexParser.singleFromString("@ARTICLE{kohn, author={Cristina vonFlach}, year={2000}}");
+    	BibtexEntry entry1 = BibtexParser.singleFromString("@ARTICLE{kohn, author={Jõao daSilva}, year={2001}}");
+    	BibtexEntry entry2 = BibtexParser.singleFromString("@ARTICLE{kohn, author={Maria dosSântos}, year={2002}}");
+    	assertEquals("Flach", LabelPatternUtil.makeLabel(entry0, "auth"));
+    	assertEquals("Silva", LabelPatternUtil.makeLabel(entry1, "auth"));
+    	assertEquals("Santos", LabelPatternUtil.makeLabel(entry2, "auth"));
+    }
 
 }

@@ -175,7 +175,8 @@ public class LabelPatternUtil {
         String regex = Globals.prefs.get("KeyPatternRegex");
         if ((regex != null) && (regex.trim().length() > 0)) {
             String replacement = Globals.prefs.get("KeyPatternReplacement");
-            _label = _label.replaceAll(regex, replacement);
+            //_label = _label.replaceAll(regex, replacement);
+            _label = _label.replaceAll("([a-z])([A-Z])", "$1 $2");
         }
 
         if (forceUpper) {
@@ -298,6 +299,9 @@ public class LabelPatternUtil {
                  * substitution of editor.
                  */
                 String authString = _entry.getField("author");
+                //tratando caso 'daSilva' => 'da Silva'
+                if(authString != null) //caso ele exista
+                	authString = authString.replaceAll("([a-z])([A-Z])","$1 $2");
 
                 if (val.startsWith("pure")) {
                     // remove the "pure" prefix so the remaining
